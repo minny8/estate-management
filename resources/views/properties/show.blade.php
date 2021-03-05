@@ -25,8 +25,8 @@
                 <td></td>
             </tr>
             <tr>
-                <td class="bg-light">備考</td>
-                <td class="text-left pl-4" colspan="3">{!! $property->memo !!}</td>
+                <td class="bg-light align-middle">備考</td>
+                <td class="text-left pl-4" colspan="3">{!! nl2br(e($property->memo)) !!}</td>
             </tr>
         </tbody>
     </table>
@@ -38,11 +38,13 @@
                 <td class="bg-light">部屋名</td>
                 <td class="bg-light">入居者名</td>
             </tr>
+            @foreach($rooms as $room)
             <tr>
-                <td>101号室</td>
+                <td>{!! link_to_route('rooms.show', $room->name, ['room' => $room->id]) !!}</td>
                 <td>佐藤楓</td>
             </tr>
+            @endforeach
         </table>
-         <p class="text-right">部屋を登録する</p>
+         <p class="text-right">{!! link_to_route('properties.rooms.create', '部屋の登録', ['property' => $property->id]) !!}</p>
     </div>
 @endsection

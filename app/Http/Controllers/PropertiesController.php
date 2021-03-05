@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Property;
+use App\Room;
 
 class PropertiesController extends Controller
 {
@@ -62,9 +63,14 @@ class PropertiesController extends Controller
     {
         
         $property = Property::findOrFail($id);
-
+        
+        $room = $property->rooms()->first();
+        
+        $rooms = Room::where('property_id', $id)->get()->all();
+        
         return view('properties.show', [
             'property' => $property,
+            'rooms' => $rooms,
         ]);
     }
     
@@ -80,24 +86,23 @@ class PropertiesController extends Controller
     
     public function update(Request $request, $id)
     {
-         // バリデーション
+        // バリデーション
         $request->validate([
             'name' => 'required',
             'address' => 'required|max:255',
         ]);
 
-        $request->user()->properties()->update([
-            'name' => $request->name,
-            'address' => $request->address,
-            'site_area' => $request->site_area,
-            'year_of_construction' => $request->year_of_construction,
-            'number_of_buildings' => $request->number_of_buildings,
-            'number_of_rooms' => $request->number_of_rooms,
-            'memo' => $request->memo,
-        ]);
+        $property = Property::findOrFail($id);
+        $property->name = $request->name;
+        $property->address = $request->address;
+        $property->site_area = $request->site_area;
+        $property->year_of_construction = $request->year_of_construction;
+        $property->number_of_buildings = $request->number_of_buildings;
+        $property->number_of_rooms = $request->number_of_rooms;
+        $property->memo = $request->memo;
+        $property->save();
 
-        // トップページへリダイレクトさせる
-        return redirect('/');
+        return redirect()->action('PropertiesController@show', ['property' => $property]);
     }
     
     public function destroy($id)
@@ -111,6 +116,6 @@ class PropertiesController extends Controller
         }
 
         // 前のURLへリダイレクトさせる
-        return redirect('/');
+        return back();
     }
 }

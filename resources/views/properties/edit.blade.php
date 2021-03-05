@@ -41,15 +41,14 @@
                     {!! Form::label('memo', '備考:') !!}
                     {!! Form::textarea('memo', null, ['class' => 'form-control']) !!}
                 </div>
-                
+                <div class="row m-auto">
                 {!! Form::submit('更新', ['class' => 'btn btn-primary']) !!}
 
-            
-                {!! Form::model($property, ['route' => ['properties.destroy', $property->id], 'method' => 'delete']) !!}
-                    {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
-                {!! Form::close() !!}
             {!! Form::close() !!}
-            
+            {!! Form::model($property, ['route' => ['properties.destroy', $property->id], 'method' => 'delete']) !!}
+                    <span class="ml-2">{!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}</span>
+            {!! Form::close() !!}
+            </div>
             {!! link_to_route('properties.show', '物件詳細に戻る', ['property' => $property->id]) !!}
         </div>
     </div>
