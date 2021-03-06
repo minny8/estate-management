@@ -14,7 +14,7 @@
             </tr>
             <tr>
                 <td class="bg-light">敷地面積</td>
-                <td>{!! $property->site_area !!}㎡</td>
+                <td>{!! number_format($property->site_area) !!}㎡</td>
                 <td class="bg-light">部屋数</td>
                 <td>{!! $property->number_of_rooms !!}部屋</td>
             </tr>
@@ -40,8 +40,18 @@
             </tr>
             @foreach($rooms as $room)
             <tr>
-                <td>{!! link_to_route('rooms.show', $room->name, ['room' => $room->id]) !!}</td>
-                <td>佐藤楓</td>
+                <td class="align-middle">{!! link_to_route('rooms.show', $room->name, ['room' => $room->id]) !!}</td>
+                <td>
+                    @if (App\Property::now_living($room->id) == null)
+                        {!! link_to_route('rooms.residents.create','空室',['room' => $room->id]) !!}
+                    @elseif(App\Property::now_living($room->id)->move_in_date > date('Y-m-d'))
+                        {!! link_to_route('residents.show', App\Property::now_living($room->id)->name, ['resident' => App\Property::now_living($room->id)->id]).nl2br(e(PHP_EOL)).date('m月d日',strtotime(App\Property::now_living($room->id)->move_in_date)).'入居' !!}
+                    @elseif(App\Property::now_living($room->id)->move_out_date > date('Y-m-d'))
+                        {!! link_to_route('residents.show', App\Property::now_living($room->id)->name, ['resident' => App\Property::now_living($room->id)->id]).nl2br(e(PHP_EOL)).date('m月d日',strtotime(App\Property::now_living($room->id)->move_out_date)).'退去' !!}
+                    @else
+                        {!! link_to_route('residents.show', App\Property::now_living($room->id)->name, ['resident' => App\Property::now_living($room->id)->id]) !!}
+                    @endif
+                </td>
             </tr>
             @endforeach
         </table>

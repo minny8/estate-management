@@ -15,4 +15,9 @@ class Room extends Model
         return $this->belongsTo(Property::class);
     }
     
+    public function residents()
+    {
+        return $this->hasMany(Resident::class);
+    }
+    
 }

@@ -46,10 +46,14 @@ class RoomsController extends Controller
         $room = Room::findOrFail($id);
         $property = Property::findOrFail($room->property_id);
         
-        return view('rooms.show', [
-           'room' => $room,
-           'property' => $property,
-        ]);
+        if(\Auth::id() == $property->user_id){
+            return view('rooms.show', [
+               'room' => $room,
+               'property' => $property,
+            ]);
+        }else{
+            return redirect('/');
+        }
     }
     
     public function edit($id)
@@ -57,10 +61,14 @@ class RoomsController extends Controller
         $room = Room::findOrFail($id);
         $property = Property::findOrFail($room->property_id);
         
-        return view('rooms.edit', [
-           'room' => $room,
-           'property' => $property,
-        ]);
+        if(\Auth::id() == $property->user_id){
+            return view('rooms.edit', [
+               'room' => $room,
+               'property' => $property,
+            ]);
+        }else{
+            return redirect('/');
+        }
     }
     
     
@@ -73,27 +81,29 @@ class RoomsController extends Controller
 
         $room = Room::findOrFail($id);
         $property = Property::findOrFail($room->property_id);
-        $room->property_id = $property->id;
-        $room->name = $request->name;
-        $room->rent = $request->rent;
-        $room->security_deposit = $request->security_deposit;
-        $room->floor_plan = $request->floor_plan;
-        $room->floor_space = $request->floor_space;
-        $room->memo = $request->memo;
-        $room->save();
         
-        return redirect()->action('RoomsController@show', ['room' => $room]);
+        if(\Auth::id() == $property->user_id){
+            $room->property_id = $property->id;
+            $room->name = $request->name;
+            $room->rent = $request->rent;
+            $room->security_deposit = $request->security_deposit;
+            $room->floor_plan = $request->floor_plan;
+            $room->floor_space = $request->floor_space;
+            $room->memo = $request->memo;
+            $room->save();
+        
+            return redirect()->action('RoomsController@show', ['room' => $room]);
+        }else{
+            return redirect('/');
+        }
     }
     
     public function destroy($id)
     {
         $room = Room::findOrFail($id);
-        $a=$room->property();
-        dd($a);
         
-       // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
-        if (\Auth::id() === $room->property['user_id']) {
-            $property->delete();
+        if (\Auth::id() === $room->property->user_id) {
+            $room->delete();
         }
 
         return redirect('/');

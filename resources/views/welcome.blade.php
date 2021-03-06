@@ -9,7 +9,7 @@
                       <div class="card" style="max-width: 18rem;">
                         <a href="/properties/{!! $property->id !!}" class="card_body text-center text-dark">
                           <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-light"><h4>{!! $property->name !!}</h4></li>
+                            <li class="list-group-item bg-light">{!! $property->name !!}</li>
                             <li class="list-group-item ">入居率</li>
                           </ul>
                         </a>
