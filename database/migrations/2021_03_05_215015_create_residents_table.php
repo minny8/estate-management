@@ -17,11 +17,11 @@ class CreateResidentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('room_id');
             $table->string('name');
-            $table->date('date_of_birth');
-            $table->string('tel',12);
-            $table->integer('rent');
+            $table->date('date_of_birth')->nullable();
+            $table->string('tel',12)->nullable();
+            $table->integer('rent')->nullable();
             $table->integer('security_deposit')->nullable();
-            $table->date('move_in_date');
+            $table->date('move_in_date')->nullable();
             $table->date('move_out_date')->nullable();
             $table->text('memo')->nullable();
             $table->timestamps();

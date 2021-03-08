@@ -38,7 +38,7 @@ class PropertiesController extends Controller
         // バリデーション
         $request->validate([
             'name' => 'required',
-            'address' => 'required|max:255',
+            'address' => 'required',
         ]);
 
         $request->user()->properties()->create([
@@ -47,7 +47,6 @@ class PropertiesController extends Controller
             'site_area' => $request->site_area,
             'year_of_construction' => $request->year_of_construction,
             'number_of_buildings' => $request->number_of_buildings,
-            'number_of_rooms' => $request->number_of_rooms,
             'memo' => $request->memo,
         ]);
 
@@ -88,7 +87,7 @@ class PropertiesController extends Controller
         // バリデーション
         $request->validate([
             'name' => 'required',
-            'address' => 'required|max:255',
+            'address' => 'required',
         ]);
 
         $property = Property::findOrFail($id);
@@ -99,7 +98,6 @@ class PropertiesController extends Controller
             $property->site_area = $request->site_area;
             $property->year_of_construction = $request->year_of_construction;
             $property->number_of_buildings = $request->number_of_buildings;
-            $property->number_of_rooms = $request->number_of_rooms;
             $property->memo = $request->memo;
             $property->save();
     
@@ -111,15 +109,12 @@ class PropertiesController extends Controller
     
     public function destroy($id)
     {
-        // idの値で投稿を検索して取得
         $property = \App\Property::findOrFail($id);
 
-        // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
         if (\Auth::id() === $property->user_id) {
             $property->delete();
         }
 
-        // 前のURLへリダイレクトさせる
-        return back();
+        return redirect('/');
     }
 }

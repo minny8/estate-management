@@ -17,11 +17,10 @@ class CreatePropertiesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('name',30);
-            $table->string('address');
-            $table->integer('site_area');
-            $table->year('year_of_construction');
-            $table->integer('number_of_buildings');
-            $table->integer('number_of_rooms');
+            $table->string('address')->nullable();
+            $table->integer('site_area')->nullable();
+            $table->year('year_of_construction')->nullable();
+            $table->integer('number_of_buildings')->nullable();
             $table->text('memo')->nullable();
             $table->timestamps();
             

@@ -27,8 +27,7 @@ class ResidentsController extends Controller
     public function store(Request $request,$id)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'tel' => 'required|max:255',
+            'name' => 'required',
         ]);
         
         $room = Room::findOrFail($id);
@@ -80,7 +79,6 @@ class ResidentsController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'rent' => 'required',
         ]);
 
         $resident = Resident::findOrFail($id);
@@ -106,8 +104,8 @@ class ResidentsController extends Controller
     
     public function destroy($id)
     {
+        $resident = Resident::findOrFail($id);
         if(\Auth::id() == $resident->room->property->user_id){
-            $resident = Resident::findOrFail($id);
             $room = Room::findOrFail($resident->room_id);
             $resident->delete();
             

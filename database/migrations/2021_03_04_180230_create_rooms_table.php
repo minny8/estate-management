@@ -17,10 +17,10 @@ class CreateRoomsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('property_id');
             $table->string('name');
-            $table->integer('rent');
+            $table->integer('rent')->nullable();
             $table->integer('security_deposit')->nullable();
-            $table->string('floor_plan',);
-            $table->integer('floor_space');
+            $table->string('floor_plan')->nullable();
+            $table->integer('floor_space')->nullable();
             $table->text('memo')->nullable();
             $table->timestamps();
             

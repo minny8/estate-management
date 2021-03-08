@@ -16,13 +16,13 @@
                 <td class="bg-light">敷地面積</td>
                 <td>{!! number_format($property->site_area) !!}㎡</td>
                 <td class="bg-light">部屋数</td>
-                <td>{!! $property->number_of_rooms !!}部屋</td>
+                <td>{!! App\Property::num_of_rooms($property->id) !!}部屋</td>
             </tr>
             <tr>
                 <td class="bg-light">建築年</td>
                 <td>{!! $property->year_of_construction !!}年</td>
                 <td class="bg-light">入居率</td>
-                <td></td>
+                <td>{!! App\Property::tenancy_rate($property->id) !!}</td>
             </tr>
             <tr>
                 <td class="bg-light align-middle">備考</td>
@@ -42,14 +42,14 @@
             <tr>
                 <td class="align-middle">{!! link_to_route('rooms.show', $room->name, ['room' => $room->id]) !!}</td>
                 <td>
-                    @if (App\Property::now_living($room->id) == null)
+                    @if (App\Property::living_status($room->id) == null)
                         {!! link_to_route('rooms.residents.create','空室',['room' => $room->id]) !!}
-                    @elseif(App\Property::now_living($room->id)->move_in_date > date('Y-m-d'))
-                        {!! link_to_route('residents.show', App\Property::now_living($room->id)->name, ['resident' => App\Property::now_living($room->id)->id]).nl2br(e(PHP_EOL)).date('m月d日',strtotime(App\Property::now_living($room->id)->move_in_date)).'入居' !!}
-                    @elseif(App\Property::now_living($room->id)->move_out_date > date('Y-m-d'))
-                        {!! link_to_route('residents.show', App\Property::now_living($room->id)->name, ['resident' => App\Property::now_living($room->id)->id]).nl2br(e(PHP_EOL)).date('m月d日',strtotime(App\Property::now_living($room->id)->move_out_date)).'退去' !!}
+                    @elseif(App\Property::living_status($room->id)->move_in_date > date('Y-m-d'))
+                        {!! link_to_route('residents.show', App\Property::living_status($room->id)->name, ['resident' => App\Property::living_status($room->id)->id]).nl2br(e(PHP_EOL)).date('m月d日',strtotime(App\Property::living_status($room->id)->move_in_date)).'入居' !!}
+                    @elseif(App\Property::living_status($room->id)->move_out_date > date('Y-m-d'))
+                        {!! link_to_route('residents.show', App\Property::living_status($room->id)->name, ['resident' => App\Property::living_status($room->id)->id]).nl2br(e(PHP_EOL)).date('m月d日',strtotime(App\Property::living_status($room->id)->move_out_date)).'退去' !!}
                     @else
-                        {!! link_to_route('residents.show', App\Property::now_living($room->id)->name, ['resident' => App\Property::now_living($room->id)->id]) !!}
+                        {!! link_to_route('residents.show', App\Property::living_status($room->id)->name, ['resident' => App\Property::living_status($room->id)->id]) !!}
                     @endif
                 </td>
             </tr>

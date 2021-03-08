@@ -23,16 +23,16 @@
                     <td>{!! $room->floor_space!!}㎡</td>
                 </tr>
                 <tr>
-                    <td class="bg-light">現況</td>
+                    <td class="bg-light align-middle">現況</td>
                     <td>
-                        @if (App\Property::now_living($room->id) == null)
+                        @if(App\Property::living_status($room->id) == null)
                             {!! link_to_route('rooms.residents.create','空室',['room' => $room->id]) !!}
-                        @elseif(App\Property::now_living($room->id)->move_in_date > date('Y-m-d'))
-                            {!! link_to_route('residents.show', App\Property::now_living($room->id)->name, ['resident' => App\Property::now_living($room->id)->id]).nl2br(e(PHP_EOL)).'(入居予定'.App\Property::now_living($room->id)->move_in_date.')' !!}
-                        @elseif(App\Property::now_living($room->id)->move_out_date > date('Y-m-d'))
-                            {!! link_to_route('residents.show', App\Property::now_living($room->id)->name, ['resident' => App\Property::now_living($room->id)->id]).nl2br(e(PHP_EOL)).'(退去予定'.App\Property::now_living($room->id)->move_out_date.')' !!}
+                        @elseif(App\Property::living_status($room->id)->move_in_date > date('Y-m-d'))
+                            {!! link_to_route('residents.show', App\Property::living_status($room->id)->name, ['resident' => App\Property::living_status($room->id)->id]).nl2br(e(PHP_EOL)).'(入居予定'.App\Property::living_status($room->id)->move_in_date.')' !!}
+                        @elseif(App\Property::living_status($room->id)->move_out_date > date('Y-m-d'))
+                            {!! link_to_route('residents.show', App\Property::living_status($room->id)->name, ['resident' => App\Property::living_status($room->id)->id]).nl2br(e(PHP_EOL)).'(退去予定'.App\Property::living_status($room->id)->move_out_date.')' !!}
                         @else
-                            {!! link_to_route('residents.show', App\Property::now_living($room->id)->name, ['resident' => App\Property::now_living($room->id)->id]) !!}
+                            {!! link_to_route('residents.show', App\Property::living_status($room->id)->name, ['resident' => App\Property::living_status($room->id)->id]) !!}
                         @endif
                     </td>
                 </tr>

@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-6">
+        <div class="col-sm-6 offset-sm-3">
             {!! Form::model($property, ['route' => 'properties.store']) !!}
 
                 <div class="form-group">
@@ -44,6 +44,7 @@
                 {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}
 
             {!! Form::close() !!}
+            {!! link_to_route('properties.index', '建物一覧に戻る', []) !!}
         </div>
     </div>
 

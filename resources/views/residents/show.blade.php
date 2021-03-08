@@ -12,7 +12,11 @@
                 </tr>
                 <tr>
                     <td class="bg-light" style="width:10%">生年月日</td>
-                    <td>{!! date('Y年m月d日',strtotime($resident->date_of_birth)) !!}</td>
+                    <td>
+                        @if($resident->date_of_birth != null)
+                            {!! date('Y年m月d日',strtotime($resident->date_of_birth)) !!}
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="bg-light">TEL</td>
@@ -28,7 +32,11 @@
                 </tr>
                 <tr>
                     <td class="bg-light">入居日</td>
-                    <td>{!! date('Y年m月d日',strtotime($resident->move_in_date)) !!}</td>
+                    <td>
+                        @if($resident->move_in_date != null)
+                            {!! date('Y年m月d日',strtotime($resident->move_in_date)) !!}
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="bg-light">退去日</td>

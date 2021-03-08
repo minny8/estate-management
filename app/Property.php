@@ -20,7 +20,18 @@ class Property extends Model
         return $this->hasMany(Room::class);
     }
     
-    public static function now_living($roomId)
+    public function residents()
+    {
+        return $this->hasManyThrough(Resident::class, Room::class);
+    }
+    
+    public static function num_of_rooms($propertyId)
+    {
+        $property = Property::findOrFail($propertyId);
+        return $property->rooms->count();
+    }
+    
+    public static function living_status($roomId)
     {
         $today = date('Y-m-d');
         $room = Room::findOrFail($roomId);
@@ -33,4 +44,30 @@ class Property extends Model
         }
     }
     
+    
+    
+    public static function tenancy_rate($propertyId)
+    {
+        
+        $today = date('Y-m-d');
+        $property = Property::findOrFail($propertyId);
+        $nowRsident = $property->residents->where('move_in_date', '<', $today)
+                                          ->where('move_out_date', '')
+                                          ->count();
+        $willMoveOut = $property->residents->where('move_in_date', '<', $today)
+                                           ->where('move_out_date', '>', $today)
+                                           ->count();
+        $moveInNull = $property->residents->where('move_in_date', null)
+                                          ->count();
+        $sum = $nowRsident + $willMoveOut - $moveInNull;
+        $num_of_rooms = $property->rooms->count();
+        
+        if($num_of_rooms != 0){
+            $rate = round($sum/$num_of_rooms*100);
+        }else{
+            $rate = 0;
+        }
+        
+        return  $sum . '/' . $num_of_rooms . '  (' . $rate . '%)';
+    }
 }

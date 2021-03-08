@@ -24,7 +24,6 @@ class RoomsController extends Controller
         // バリデーション
         $request->validate([
             'name' => 'required',
-            'rent' => 'required',
         ]);
 
 
@@ -76,7 +75,6 @@ class RoomsController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'rent' => 'required',
         ]);
 
         $room = Room::findOrFail($id);
@@ -106,6 +104,6 @@ class RoomsController extends Controller
             $room->delete();
         }
 
-        return redirect('/');
+        return redirect()->action('PropertiesController@show', ['property' => $room->property_id]);
     }
 }

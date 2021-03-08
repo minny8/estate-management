@@ -5,7 +5,7 @@
         <div class="offset-3 col-6">
             <h1 class=text-center>{!! $property->name !!}</h1>
             {!! Form::model($room, ['route' => ['properties.rooms.store', $property->id]]) !!}
-
+                
                 <div class="form-group">
                     {!! Form::label('name', '部屋名:') !!}
                     {!! Form::text('name', null, ['class' => 'form-control']) !!}

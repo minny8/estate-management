@@ -15,5 +15,4 @@ class Resident extends Model
         return $this->belongsTo(Room::class);
     }
     
-    
 }

@@ -3,8 +3,7 @@
 @section('content')
     <div class="row">
         <div class="offset-3 col-6">
-            <h1 class="text-center">{!! $property->name !!}</h1>
-            
+            <h1 class=text-center>{!! $room->property->name !!}</h1>
             {!! Form::model($room, ['route' => ['rooms.update', $room->id], 'method' => 'put']) !!}
 
                 <div class="form-group">
