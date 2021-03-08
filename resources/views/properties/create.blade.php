@@ -31,10 +31,6 @@
                     {!! Form::text('number_of_buildings', null, ['class' => 'form-control']) !!}
                 </div>
                 
-                <div class="form-group">
-                    {!! Form::label('number_of_rooms', '部屋数:') !!}
-                    {!! Form::text('number_of_rooms', null, ['class' => 'form-control']) !!}
-                </div>
                 
                 <div class="form-group">
                     {!! Form::label('memo', '備考:') !!}
