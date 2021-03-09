@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <td class="bg-light align-middle">備考</td>
-                <td class="text-left pl-4" colspan="3">{! nl2br(e($property->memo)) !}</td>
+                <td class="text-left pl-4" colspan="3">{!! nl2br(e($property->memo)) !!}</td>
             </tr>
         </tbody>
     </table>
