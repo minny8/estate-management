@@ -28,9 +28,9 @@ class ResidentsController extends Controller
     {
         $request->validate([
             'name' => 'required|max:10',
-            'tel' =>  'max:12',
-            'rent' => 'max:7',
-            'security_deposit' => 'max:7',
+            'tel' =>  'digits_between:10,11|nullable',
+            'rent' => 'digits_between:1,7|nullable',
+            'security_deposit' => 'digits_between:1,7|nullable',
         ]);
         
         $room = Room::findOrFail($id);
@@ -82,9 +82,9 @@ class ResidentsController extends Controller
     {
         $request->validate([
             'name' => 'required|max:10',
-            'tel' =>  'max:12',
-            'rent' => 'max:7',
-            'security_deposit' => 'max:7',
+            'tel' =>  'digits_between:10,11|nullable',
+            'rent' => 'digits_between:1,7|nullable',
+            'security_deposit' => 'digits_between:1,7|nullable',
         ]);
 
         $resident = Resident::findOrFail($id);

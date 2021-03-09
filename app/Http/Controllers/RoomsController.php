@@ -24,10 +24,10 @@ class RoomsController extends Controller
         // バリデーション
         $request->validate([
             'name' => 'required|max:10',
-            'rent' => 'max:7',
-            'security_deposit' => 'max:7',
-            'floor_plan' => 'max:10',
-            'floor_space' => 'max:10',
+            'rent' => 'digits_between:1,7|nullable',
+            'security_deposit' => 'digits_between:1,7|nullable',
+            'floor_plan' => 'max:15',
+            'floor_space' => 'digits_between:1,3|nullable',
         ]);
 
 
@@ -79,10 +79,10 @@ class RoomsController extends Controller
     {
         $request->validate([
             'name' => 'required|max:10',
-            'rent' => 'max:7',
-            'security_deposit' => 'max:7',
-            'floor_plan' => 'max:10',
-            'floor_space' => 'max:10',
+            'rent' => 'digits_between:1,7|nullable',
+            'security_deposit' => 'digits_between:1,7|nullable',
+            'floor_plan' => 'max:15',
+            'floor_space' => 'digits_between:1,3|nullable',
         ]);
 
         $room = Room::findOrFail($id);

@@ -39,9 +39,9 @@ class PropertiesController extends Controller
         $request->validate([
             'name' => 'required|max:30',
             'address' => 'required|max:255',
-            'site_area' => 'max:5',
-            'year_of_construction' => 'max:4',
-            'number_of_buildings' => 'max:2',
+            'site_area' => 'digits_between:1,4|nullable',
+            'year_of_construction' => 'digits:4|nullable',
+            'number_of_buildings' => 'digits_between:1,2|nullable',
         ]);
 
         $request->user()->properties()->create([
@@ -91,9 +91,9 @@ class PropertiesController extends Controller
         $request->validate([
             'name' => 'required|max:30',
             'address' => 'required|max:255',
-            'site_area' => 'max:5',
-            'year_of_construction' => 'max:4',
-            'number_of_buildings' => 'max:2',
+            'site_area' => 'digits_between:1,4|nullable',
+            'year_of_construction' => 'digits:4|nullable',
+            'number_of_buildings' => 'digits_between:1,2|nullable',
         ]);
 
         $property = Property::findOrFail($id);
