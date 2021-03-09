@@ -33,7 +33,7 @@
                 
                 <div class="form-group">
                     {!! Form::label('memo', '備考:') !!}
-                    {!! Form::text('memo', null, ['class' => 'form-control']) !!}
+                    {!! Form::textarea('memo', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="row m-auto">
                 {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}

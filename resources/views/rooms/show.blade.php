@@ -38,7 +38,7 @@
                 </tr>
                 <tr>
                     <td class="bg-light align-middle">備考</td>
-                    <td class="text-left pl-4">{{ nl2br(e($room->memo)) }}</td>
+                    <td class="text-left pl-4">{!! nl2br(e($room->memo)) !!}</td>
                 </tr>
             </tbody>
         </table>

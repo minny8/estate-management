@@ -48,7 +48,7 @@
                 </tr>
                 <tr>
                     <td class="bg-light align-middle">備考</td>
-                    <td class="text-left pl-4">{{ nl2br(e($resident->memo)) }}</td>
+                    <td class="text-left pl-4">{! nl2br(e($resident->memo)) }</td>
                 </tr>
             </tbody>
         </table>
