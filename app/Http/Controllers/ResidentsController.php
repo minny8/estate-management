@@ -27,7 +27,10 @@ class ResidentsController extends Controller
     public function store(Request $request,$id)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:10',
+            'tel' =>  'max:12',
+            'rent' => 'max:7',
+            'security_deposit' => 'max:7',
         ]);
         
         $room = Room::findOrFail($id);
@@ -78,7 +81,10 @@ class ResidentsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:10',
+            'tel' =>  'max:12',
+            'rent' => 'max:7',
+            'security_deposit' => 'max:7',
         ]);
 
         $resident = Resident::findOrFail($id);

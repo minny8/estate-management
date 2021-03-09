@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="offset-3 col-6">
-            <h1 class=text-center>{!! $resident->room->property->name . $resident->room->name !!}</h1>
+            <h1 class=text-center>{{ $resident->room->property->name . $resident->room->name }}</h1>
             {!! Form::model($resident, ['route' => ['residents.update', $resident->id], 'method' => 'put']) !!}
 
                 <div class="form-group">

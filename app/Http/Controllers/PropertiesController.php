@@ -37,8 +37,11 @@ class PropertiesController extends Controller
     {
         // バリデーション
         $request->validate([
-            'name' => 'required',
-            'address' => 'required',
+            'name' => 'required|max:30',
+            'address' => 'required|max:255',
+            'site_area' => 'max:5',
+            'year_of_construction' => 'max:4',
+            'number_of_buildings' => 'max:2',
         ]);
 
         $request->user()->properties()->create([
@@ -86,8 +89,11 @@ class PropertiesController extends Controller
     {
         // バリデーション
         $request->validate([
-            'name' => 'required',
-            'address' => 'required',
+            'name' => 'required|max:30',
+            'address' => 'required|max:255',
+            'site_area' => 'max:5',
+            'year_of_construction' => 'max:4',
+            'number_of_buildings' => 'max:2',
         ]);
 
         $property = Property::findOrFail($id);

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class=text-center>{!! $property->name !!}</h1>
+    <h1 class=text-center>{{ $property->name }}</h1>
 
     <div class="row">
         <div class="offset-3 col-6">

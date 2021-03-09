@@ -9,8 +9,8 @@
                       <div class="card">
                         <a href="/properties/{!! $property->id !!}" class="card_body text-center text-dark">
                           <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-light">{!! $property->name !!}</li>
-                            <li class="list-group-item ">{!! App\Property::tenancy_rate($property->id) !!}</li>
+                            <li class="list-group-item bg-light">{{ $property->name }}</li>
+                            <li class="list-group-item ">{{ App\Property::tenancy_rate($property->id) }}</li>
                           </ul>
                         </a>
                       </diV>
