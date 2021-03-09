@@ -25,14 +25,14 @@
                 <tr>
                     <td class="bg-light align-middle">現況</td>
                     <td>
-                        @if(App\Property::living_status($room->id) == null)
-                            {{ link_to_route('rooms.residents.create','空室',['room' => $room->id]) }}
+                        @if (App\Property::living_status($room->id) == null)
+                            {!! link_to_route('rooms.residents.create','空室',['room' => $room->id]) !!}
                         @elseif(App\Property::living_status($room->id)->move_in_date > date('Y-m-d'))
-                            {{ link_to_route('residents.show', App\Property::living_status($room->id)->name, ['resident' => App\Property::living_status($room->id)->id]).nl2br(e(PHP_EOL)).'(入居予定'.App\Property::living_status($room->id)->move_in_date.')' }}
+                            {!! link_to_route('residents.show', App\Property::living_status($room->id)->name, ['resident' => App\Property::living_status($room->id)->id]).nl2br(e(PHP_EOL)).date('m月d日',strtotime(App\Property::living_status($room->id)->move_in_date)).'入居' !!}
                         @elseif(App\Property::living_status($room->id)->move_out_date > date('Y-m-d'))
-                            {{ link_to_route('residents.show', App\Property::living_status($room->id)->name, ['resident' => App\Property::living_status($room->id)->id]).nl2br(e(PHP_EOL)).'(退去予定'.App\Property::living_status($room->id)->move_out_date.')' }}
+                            {!! link_to_route('residents.show', App\Property::living_status($room->id)->name, ['resident' => App\Property::living_status($room->id)->id]).nl2br(e(PHP_EOL)).date('m月d日',strtotime(App\Property::living_status($room->id)->move_out_date)).'退去' !!}
                         @else
-                            {{ link_to_route('residents.show', App\Property::living_status($room->id)->name, ['resident' => App\Property::living_status($room->id)->id]) }}
+                            {!! link_to_route('residents.show', App\Property::living_status($room->id)->name, ['resident' => App\Property::living_status($room->id)->id]) !!}
                         @endif
                     </td>
                 </tr>
